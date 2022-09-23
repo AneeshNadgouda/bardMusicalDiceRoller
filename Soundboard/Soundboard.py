@@ -4,6 +4,8 @@ import random
 import datetime
 import keyboard
 from tkinter import *
+from PIL import Image
+from PIL import ImageTk
 
 root = Tk()
 root.title('Bardic Dice Roller')
@@ -31,7 +33,9 @@ def roll_dice():
     d1 = random.choice(my_dice)
 
     #update labels
-    img = PhotoImage(file = d1)
+    image = Image.open(d1)
+    image = image.resize((500,500), Image.ANTIALIAS)
+    img =  ImageTk.PhotoImage(image)
     dice_label1.image = img
     dice_label1.config(image = img)
 
@@ -54,7 +58,12 @@ my_frame.pack(pady = 20)
 
 #create dice labels
 #img = PhotoImage(file=r"C:\Users\agn_a\Desktop\Projects\Soundboard\bardMusicalDiceRoller\Soundboard\Dice\1.png")
-img = PhotoImage(file=my_dice[0])
+#img = PhotoImage(file=my_dice[0])
+
+image = Image.open(r"C:\Users\agn_a\Desktop\Projects\Soundboard\bardMusicalDiceRoller\Soundboard\Dice\1.png")
+image = image.resize((500,500), Image.ANTIALIAS)
+img =  ImageTk.PhotoImage(image)
+
 
 dice_label1 = Label(my_frame, image = img, text = '', font = ("Helvetica", 100), fg = "black")
 dice_label1.grid(row = 0, column = 0, padx = 5)
