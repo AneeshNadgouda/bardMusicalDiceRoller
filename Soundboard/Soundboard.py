@@ -28,27 +28,23 @@ def get_number(x):
 #Roll the dice
 def roll_dice():
     #roll random dice
-    d1 = random.choice(dice_list)
-
-    #determine dice number
-    sd1 = get_number(d1)
+    d1 = random.choice(my_dice)
 
     #update labels
-    dice_label1.config(text = d1)
-
-    #Update sub dice labels
-    sub_dice_label1.config(text=sd1)
+    img = PhotoImage(file = d1)
+    dice_label1.image = img
+    dice_label1.config(image = img)
 
     #Update total label
-    total = sd1
-    total_label.config(text = f"You rolled: {total}")
+    total_label.config(text = f"You rolled: {get_number(d1)}")
 
 #Create a Dice List
-dice_path = glob.glob(r"C:\Users\agn_a\Desktop\Projects\Soundboard\Dice" + "/*.jpg", recursive=True)
-dice_list = []
-for i in dice_path:
-    dice_list.append(i)
-print(dice_list)
+
+dicejpgs = glob.glob(r"C:\Users\agn_a\Desktop\Projects\Soundboard\bardMusicalDiceRoller\Soundboard\Dice" + "/*.png", recursive=True)
+my_dice = []
+for jpg in dicejpgs:
+    my_dice.append(jpg)
+
 
 #my_dice = ["\u2680","\u2681","\u2682","\u2683","\u2684","\u2685"]
 
@@ -57,10 +53,12 @@ my_frame = Frame(root)
 my_frame.pack(pady = 20)
 
 #create dice labels
-dice_label1 = Label(my_frame, text = '', font = ("Helvetica", 100), fg = "black")
+#img = PhotoImage(file=r"C:\Users\agn_a\Desktop\Projects\Soundboard\bardMusicalDiceRoller\Soundboard\Dice\1.png")
+img = PhotoImage(file=my_dice[0])
+
+dice_label1 = Label(my_frame, image = img, text = '', font = ("Helvetica", 100), fg = "black")
 dice_label1.grid(row = 0, column = 0, padx = 5)
-sub_dice_label1 = Label(my_frame, text = "")
-sub_dice_label1.grid(row = 1, column = 0)
+dice_label1.image = img
 
 #create Roll button
 my_button = Button(root, text = "Roll Dice", command = roll_dice, font = ("Helvetica", 24))
