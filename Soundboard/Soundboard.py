@@ -2,13 +2,9 @@ from multiprocessing.connection import wait
 import playsound as ps
 import glob
 import random
-import datetime
-import keyboard
 from tkinter import *
 from tkvideo import tkvideo
-from PIL import Image
-from PIL import ImageTk
-import time
+
 
 global defaultFileArr, soundsPlayed, test, d1
 defaultFileArr, soundsPlayed, test, d1 = [], [], [], ''
@@ -81,7 +77,7 @@ def playRiff(d1):
         print(random.choice(range(len(test))))
         i = random.choice(range(len(defaultFileArr)))
         riff = defaultFileArr[i]
-        ps.playsound(riff)
+        ps.playsound(riff, False)
         soundsPlayed.append(riff)
         if(len(defaultFileArr) == 1):
             for i in soundsPlayed:
