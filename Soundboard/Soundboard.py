@@ -1,3 +1,4 @@
+from turtle import update
 import playsound as ps
 import glob
 import random
@@ -7,8 +8,8 @@ from tkinter import *
 from PIL import Image
 from PIL import ImageTk
 
-global defaultFileArr, soundsPlayed, test
-defaultFileArr, soundsPlayed, test = [], [], []
+global defaultFileArr, soundsPlayed, test, d1
+defaultFileArr, soundsPlayed, test, d1 = [], [], [], ''
 
 path = r'C:\Users\agn_a\Desktop\Projects\Soundboard\bardMusicalDiceRoller\Soundboard'
 roll_one = path + '\One'
@@ -55,7 +56,10 @@ def playRiff(d1):
                 defaultFileArr.append(i)
             del defaultFileArr[0]
             for i in range(len(soundsPlayed)):
-                del soundsPlayed[i]
+                try:
+                    del soundsPlayed[i]
+                except:
+                    break
             print("Deleted: ", str(riff))
             print("Reset sounds")
         else:
@@ -76,7 +80,10 @@ def roll_dice():
 
     #Update total label
     total_label.config(text = f"You rolled a {get_number(d1)}!!!")
-    
+
+def perform_roll():
+    roll_dice()
+    root.update()
     playRiff(d1)
 
 #Create a Dice List
@@ -100,7 +107,7 @@ dice_label1.grid(row = 0, column = 0, padx = 5)
 dice_label1.image = img
 
 #create Roll button
-my_button = Button(root, text = "Roll Dice", command = roll_dice, font = ("Helvetica", 24))
+my_button = Button(root, text = "Roll Dice", command = perform_roll, font = ("Helvetica", 24))
 my_button.pack(pady = 20)
 
 #create totals label
