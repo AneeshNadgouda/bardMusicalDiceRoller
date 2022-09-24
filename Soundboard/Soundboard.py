@@ -14,18 +14,16 @@ root.geometry("500x500")
 
 #Get the dice number
 def get_number(x):
-    if x == "\u2680":
+    if x == 'C:\\Users\\agn_a\\Desktop\\Projects\\Soundboard\\bardMusicalDiceRoller\\Soundboard\\Dice\\1.png':
         return(1)
-    elif x == "\u2681":
+    elif x == 'C:\\Users\\agn_a\\Desktop\\Projects\\Soundboard\\bardMusicalDiceRoller\\Soundboard\\Dice\\2.png':
         return(2)
-    elif x == "\u2682":
+    elif x == 'C:\\Users\\agn_a\\Desktop\\Projects\\Soundboard\\bardMusicalDiceRoller\\Soundboard\\Dice\\3.png':
         return(3)
-    elif x == "\u2683":
+    elif x == 'C:\\Users\\agn_a\\Desktop\\Projects\\Soundboard\\bardMusicalDiceRoller\\Soundboard\\Dice\\4.png':
         return(4)
-    elif x == "\u2684":
+    elif x == 'C:\\Users\\agn_a\\Desktop\\Projects\\Soundboard\\bardMusicalDiceRoller\\Soundboard\\Dice\\5.png':
         return(5)
-    elif x == "\u2685":
-        return(6)
 
 #Roll the dice
 def roll_dice():
@@ -34,13 +32,13 @@ def roll_dice():
 
     #update labels
     image = Image.open(d1)
-    image = image.resize((500,500), Image.ANTIALIAS)
+    image = image.resize((500,500))
     img =  ImageTk.PhotoImage(image)
     dice_label1.image = img
     dice_label1.config(image = img)
 
     #Update total label
-    total_label.config(text = f"You rolled: {get_number(d1)}")
+    total_label.config(text = f"You rolled a {get_number(d1)}!!!")
 
 #Create a Dice List
 
@@ -50,20 +48,14 @@ for jpg in dicejpgs:
     my_dice.append(jpg)
 
 
-#my_dice = ["\u2680","\u2681","\u2682","\u2683","\u2684","\u2685"]
-
 #Create a frame
 my_frame = Frame(root)
 my_frame.pack(pady = 20)
 
 #create dice labels
-#img = PhotoImage(file=r"C:\Users\agn_a\Desktop\Projects\Soundboard\bardMusicalDiceRoller\Soundboard\Dice\1.png")
-#img = PhotoImage(file=my_dice[0])
-
 image = Image.open(r"C:\Users\agn_a\Desktop\Projects\Soundboard\bardMusicalDiceRoller\Soundboard\Dice\1.png")
-image = image.resize((500,500), Image.ANTIALIAS)
+image = image.resize((500,500))
 img =  ImageTk.PhotoImage(image)
-
 
 dice_label1 = Label(my_frame, image = img, text = '', font = ("Helvetica", 100), fg = "black")
 dice_label1.grid(row = 0, column = 0, padx = 5)
