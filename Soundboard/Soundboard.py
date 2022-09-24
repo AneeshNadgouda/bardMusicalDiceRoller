@@ -7,12 +7,25 @@ from tkinter import *
 from PIL import Image
 from PIL import ImageTk
 
+global defaultFileArr, soundsPlayed, test
+defaultFileArr, soundsPlayed, test = [], [], []
+
+path = r'C:\Users\agn_a\Desktop\Projects\Soundboard\bardMusicalDiceRoller\Soundboard'
+roll_one = path + '\One'
+roll_twenty = path + '\Twenty'
+roll_default = path + '\Default'
+
+defaultFiles = glob.glob(roll_default + "/*.mp3", recursive=True)
+
+for file in defaultFiles:
+    defaultFileArr.append(file)
+    test.append(file)
+
 root = Tk()
 root.title('Bardic Dice Roller')
 root.iconbitmap()
 root.geometry("500x500")
 
-#Get the dice number
 def get_number(x):
     if x == 'C:\\Users\\agn_a\\Desktop\\Projects\\Soundboard\\bardMusicalDiceRoller\\Soundboard\\Dice\\1.png':
         return(1)
@@ -24,6 +37,30 @@ def get_number(x):
         return(4)
     elif x == 'C:\\Users\\agn_a\\Desktop\\Projects\\Soundboard\\bardMusicalDiceRoller\\Soundboard\\Dice\\5.png':
         return(5)
+
+
+def playRiff(d1):
+    if(get_number(d1) == 1):
+        pass
+    elif(get_number(d1) == 20):
+        pass
+    else:
+        print(random.choice(range(len(test))))
+        i = random.choice(range(len(defaultFileArr)))
+        riff = defaultFileArr[i]
+        ps.playsound(riff)
+        soundsPlayed.append(riff)
+        if(len(defaultFileArr) == 1):
+            for i in soundsPlayed:
+                defaultFileArr.append(i)
+            del defaultFileArr[0]
+            for i in range(len(soundsPlayed)):
+                del soundsPlayed[i]
+            print("Deleted: ", str(riff))
+            print("Reset sounds")
+        else:
+            del defaultFileArr[i]
+            print("Deleted:", str(riff)) 
 
 #Roll the dice
 def roll_dice():
@@ -39,9 +76,10 @@ def roll_dice():
 
     #Update total label
     total_label.config(text = f"You rolled a {get_number(d1)}!!!")
+    
+    playRiff(d1)
 
 #Create a Dice List
-
 dicejpgs = glob.glob(r"C:\Users\agn_a\Desktop\Projects\Soundboard\bardMusicalDiceRoller\Soundboard\Dice" + "/*.png", recursive=True)
 my_dice = []
 for jpg in dicejpgs:
@@ -72,11 +110,6 @@ total_label.pack(pady = 40)
 #roll the dice
 roll_dice()
 root.mainloop()
-
-
-
-
-
 
 
 # path = r'C:\Users\agn_a\Desktop\Projects\Soundboard'
